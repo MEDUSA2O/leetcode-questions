@@ -11,31 +11,18 @@
  */
 class Solution {
 public:
-    int kthSmallest(TreeNode* root, int k) {
-        vector<int> result;
-        getAllNodes(root, result);
+    int kthSmallest(TreeNode* root, int &k) {
+        if(root==NULL) return -1;
 
-        // Check if k is valid
-        if (k >= 1 && k <= result.size()) {
-            return result[k - 1];
-        }
+        int leftans=  kthSmallest(root->left,k);
 
-        // Handle invalid k
-        return -1; // or any suitable value indicating invalid k
-    }
+        if(leftans != -1)return leftans;
+        
+       k--;
+       if(k==0) return root->val;
 
-private:
-    void getAllNodes(TreeNode* root, vector<int>& result) {
-        if (root == nullptr) {
-            return;
-        }
-
-        // Recursively traverse the left and right subtrees
-        getAllNodes(root->left, result);
-
-        // Process the current node
-        result.push_back(root->val);
-
-        getAllNodes(root->right, result);
+       int rightans =  kthSmallest(root->right,k);
+       return rightans;
+        
     }
 };
