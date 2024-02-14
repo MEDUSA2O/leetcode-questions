@@ -11,15 +11,14 @@ public:
         for (auto it : words2) {
             if (mp[it] == 1)
                 mp[it] = 2;
-            else if
-                (mp[it] == 2) mp[it] = -1;
+            else if (mp[it] == 2)
+                mp[it] = -1;
         }
-        int count = 0 ;
-        for(auto o : mp){
-            if(o.second == 2){
+        int count = 0;
+        for (auto o : mp) {
+            if (o.second == 2) {
                 count++;
             }
-
         }
         return count;
     }
