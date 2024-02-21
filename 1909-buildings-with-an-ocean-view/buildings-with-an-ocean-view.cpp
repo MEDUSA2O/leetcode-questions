@@ -1,15 +1,19 @@
 class Solution {
 public:
     vector<int> findBuildings(vector<int>& heights) {
-        vector<int> res;
-        int max = 0;
-        for(int i=heights.size()-1; i>=0; i--){
+        int n = heights.size();
+        int max = heights[n-1];
+        vector<int>ans;
+        ans.push_back(n-1);
+        for(int i = n - 2 ; i >= 0 ; i--){
             if(heights[i] > max){
-                res.push_back(i);
+                ans.push_back(i);
                 max = heights[i];
             }
         }
-        sort(res.begin(), res.end());
-        return res;
+        sort(ans.begin(),ans.end());
+        return ans;
+
+        
     }
 };
