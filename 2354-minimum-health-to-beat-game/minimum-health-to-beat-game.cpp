@@ -9,8 +9,8 @@ public:
                 max = damage[j];
             }
         }
-        if (armor == 0)
-            return sum + 1;
-       return sum - min(armor, max) + 1;
+        // if (armor == 0)
+        //     return sum + 1;
+        return sum - min(armor, max) + 1;
     }
 };
