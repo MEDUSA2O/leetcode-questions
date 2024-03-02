@@ -1,14 +1,20 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> ans;
-        int square;
-        for (int i = 0; i < n; i++) {
-            square = nums[i] * nums[i];
-            ans.push_back(square);
+        vector<int> ans(nums.size());
+        int l = 0;
+        int r = nums.size() - 1;
+        int curr = r ;
+        while (l <= r) {
+            if (abs( nums[l] ) > abs( nums[r] )) {
+                ans[curr] = pow(nums[l], 2);
+                l++;
+            } else {
+                ans[curr] = pow(nums[r], 2);
+                r--;
+            }
+            curr--;
         }
-        sort(ans.begin(), ans.end());
         return ans;
     }
 };
