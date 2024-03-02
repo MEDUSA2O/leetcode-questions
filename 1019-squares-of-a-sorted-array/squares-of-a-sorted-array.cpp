@@ -6,7 +6,7 @@ public:
         int r = nums.size() - 1;
         int curr = r ;
         while (l <= r) {
-            if (abs( nums[l] ) > abs( nums[r] )) {
+            if (abs( nums[l] ) > abs( nums[r])) {
                 ans[curr] = pow(nums[l], 2);
                 l++;
             } else {
