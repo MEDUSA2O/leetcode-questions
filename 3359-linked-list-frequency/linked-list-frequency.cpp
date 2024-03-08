@@ -14,7 +14,7 @@ public:
         ListNode* current = dummy;
 
         // Iterate through the map to create new nodes for each frequency
-        for (auto& [num, freq] : mp) {
+        for (auto [num, freq] : mp) {
             current->next = new ListNode(freq);
             current = current->next;
         }
