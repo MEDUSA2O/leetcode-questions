@@ -1,27 +1,25 @@
 class MovingAverage {
-    private:
+private:
     int size;
-    vector<int>window;
+    vector<int> window;
     int windowSum;
+
 public:
     MovingAverage(int size) {
-        this -> size = size;
-        windowSum = 0 ; 
-        
+        this->size = size;
+        windowSum = 0;
     }
-    
+
     double next(int val) {
         window.push_back(val);
-        if(window.size() > size){
+        if (window.size() > size) {
             windowSum += val - window.front();
             window.erase(window.begin());
 
-        }
-        else{
+        } else {
             windowSum += val;
         }
         return windowSum * 1.0 / window.size();
-        
     }
 };
 
