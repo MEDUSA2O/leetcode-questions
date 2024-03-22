@@ -13,14 +13,15 @@ public:
     bool isPalindrome(ListNode* head) {
         vector<int> arr;
         ListNode* curr = head;
-        while(curr != NULL){
+        while (curr != NULL) {
             arr.push_back(curr->val);
             curr = curr->next;
         }
-        for(int i = 0 ; i < arr.size()/2 ; i++){
-            if(arr[i] != arr[arr.size() - 1 - i] ) return false;
+        for (int i = 0; i < arr.size() / 2; i++) {
+            if (arr[i] != arr[arr.size() - 1 - i])
+                return false;
         }
+
         return true;
-        
     }
 };
