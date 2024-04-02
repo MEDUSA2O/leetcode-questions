@@ -5,7 +5,7 @@ public:
         unordered_map<char, char> cp;
         for (int i = 0; i < s.size(); i++) {
             if (mp[s[i]] == '\0') {
-                for (const auto& kv : mp) {
+                for ( auto kv : mp) {
                     if (kv.second == t[i]) {
                         return false;
                     }
