@@ -1,15 +1,14 @@
 class Solution {
 public:
     string removeKdigits(string num, int k) {
-        if (num.size() <= k)
-            return "0";
-        int n = num.size();
         int i = 0;
-        while (k > 0 && i < n - 1) {
+        int n = num.size();
+        while (i < n - 1 && k > 0) {
             if (num[i] > num[i + 1]) {
                 num.erase(i, 1);
-                if (i > 0)
+                if (i > 0) {
                     i--;
+                }
                 k--;
             } else {
                 i++;
