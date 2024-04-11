@@ -15,16 +15,13 @@ public:
                 i++;
             }
         }
-        // If there are remaining digits to remove, remove them from the end
         while (k > 0) {
             num.pop_back();
             k--;
         }
-        // Remove leading zeros
         while (!num.empty() && num[0] == '0') {
             num.erase(0, 1);
         }
-        // If the resulting string is empty, return "0"
         return num.empty() ? "0" : num;
     }
 };
