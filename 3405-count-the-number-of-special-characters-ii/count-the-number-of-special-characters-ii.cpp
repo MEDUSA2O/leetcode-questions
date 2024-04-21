@@ -3,8 +3,8 @@ public:
     int numberOfSpecialChars(string s) {
         int n = s.length();
         int count = 0;
-        vector<int> a(150, -1); // upperCase
-        vector<int> b(150, -1); // lowerCase
+        vector<int> a(190, -1); // upperCase
+        vector<int> b(190, -1); // lowerCase
         for(int i = 0; i < n; i++){
             if(s[i] >= 65 && s[i] <= 90){ // count first occurrence of capital letters 
                 if(a[s[i]] == -1) a[s[i]] = i; 
