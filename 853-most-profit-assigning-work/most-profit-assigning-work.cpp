@@ -1,30 +1,35 @@
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
 class Solution {
 public:
     int maxProfitAssignment(vector<int>& difficulty, vector<int>& profit, vector<int>& worker) {
-        vector<pair<int, int>> jobs;
-        for (int i = 0; i < difficulty.size(); i++) {
-            jobs.emplace_back(difficulty[i], profit[i]);
+        unordered_map<int, int> mp;
+        int maxprof = 0;
+        
+        // Step 1: Create a map for difficulty and profit
+        for(int i = 0 ; i < difficulty.size() ; i++){
+            mp[difficulty[i]] = max(mp[difficulty[i]], profit[i]);
         }
-
-        // Sort jobs by difficulty
-        sort(jobs.begin(), jobs.end());
-        // Sort workers by their ability
-        sort(worker.begin(), worker.end());
-
-        int maxProfit = 0, best = 0, j = 0;
-        for (int i = 0; i < worker.size(); i++) {
-            while (j < jobs.size() && worker[i] >= jobs[j].first) {
-                best = max(best, jobs[j].second);
-                j++;
+        
+        // Step 2: Create a sorted list of difficulties
+        sort(difficulty.begin(), difficulty.end());
+        
+        // Step 3: Update the profit array based on the difficulty map
+        for(int i = 0; i < difficulty.size(); i++){
+            profit[i] = mp[difficulty[i]];
+        }
+        
+        // Step 4: Calculate the maximum profit for each worker
+        for(int i = 0; i < worker.size(); i++){
+            int bestProfit = 0;
+            for(int j = 0; j < difficulty.size(); j++){
+                if(worker[i] >= difficulty[j]){
+                    bestProfit = max(bestProfit, profit[j]);
+                } else {
+                    break;
+                }
             }
-            maxProfit += best;
+            maxprof += bestProfit;
         }
-
-        return maxProfit;
+        
+        return maxprof;
     }
 };
