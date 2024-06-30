@@ -17,7 +17,7 @@ public:
             fast=fast->next->next;
             if(slow==fast) break;
         }
-        if(!(fast && fast->next)) return NULL;
+         if(fast == NULL || fast -> next == NULL ) return NULL;
         ListNode* temp=head;
         while(temp!=slow){
             temp=temp->next;
