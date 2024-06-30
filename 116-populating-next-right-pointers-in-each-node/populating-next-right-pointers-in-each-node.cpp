@@ -19,36 +19,31 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
-        if (!root)
-            return root;
-
-        std::queue<Node*> q;
+        if( root == NULL )return root;
+        queue<Node*>q;
         q.push(root);
-        q.push(NULL); // NULL marks the end of the first level
-
-        while (!q.empty()) {
-            Node* node = q.front();
+        q.push(NULL);
+        while(q.empty() == false){
+            Node* curr = q.front();
             q.pop();
-
-            if (node == NULL) {
-                // End of current level
-                if (!q.empty()) {
-                    // If there are more nodes to process, add a NULL marker for
-                    // the next level
+            if( curr == NULL){
+                if(q.empty() == false){
                     q.push(NULL);
                 }
-            } else {
-                // Connect the current node to the next node in the queue
-                node->next = q.front();
-
-                // Add children to the queue
-                if (node->left)
-                    q.push(node->left);
-                if (node->right)
-                    q.push(node->right);
             }
-        }
+            else{
+                curr -> next = q.front();
+                if(curr -> left){
+                    q.push(curr->left);
+                }
+                if(curr->right){
+                    q.push(curr->right);
+                }
 
+            }
+            
+        }
+        
         return root;
     }
 };
