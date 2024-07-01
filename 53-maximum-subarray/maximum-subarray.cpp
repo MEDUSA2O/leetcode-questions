@@ -1,17 +1,14 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        ios_base::sync_with_stdio(0); 
-        
-        int n = nums.size();
-        if( n== 0)return 0;
-        int curr = nums[0];
-        int maxi = nums[0];
-        for(int i =1 ; i < n ;i++){
-            curr = max(nums[i] , curr+nums[i]);
-            maxi = max(curr,maxi);
+        ios_base::sync_with_stdio(0);
+        int sum = 0, n = nums.size(), maxSum = INT_MIN;
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            maxSum = max(sum, maxSum);
+            if (sum < 0)
+                sum = 0; // dont carry negative it will hamper the sum
         }
-        return maxi;
-        
+        return maxSum;
     }
 };
