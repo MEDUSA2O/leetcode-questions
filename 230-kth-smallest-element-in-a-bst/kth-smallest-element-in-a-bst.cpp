@@ -11,18 +11,19 @@
  */
 class Solution {
 public:
-    int kthSmallest(TreeNode* root, int &k) {
-        if(root==NULL) return -1;
-
-        int leftans=  kthSmallest(root->left,k);
-
-        if(leftans != -1)return leftans;
-        
-       k--;
-       if(k==0) return root->val;
-
-       int rightans =  kthSmallest(root->right,k);
-       return rightans;
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode*>s;
+        while(true){
+            while(root != NULL){
+                s.push(root);
+                root = root -> left;
+            }
+            root = s.top();
+            s.pop();
+            k--;
+            if(k==0)return root -> val;
+            root = root -> right;
+        }
         
     }
 };
