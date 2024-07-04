@@ -1,7 +1,7 @@
 class Solution {
 public:
     ListNode* mergeNodes(ListNode* head) {
-        ListNode* x = head->next;  
+        ListNode* x = head->next;
         int sum = 0;
         vector<int> ans;
 
@@ -17,7 +17,6 @@ public:
             x = x->next;
         }
 
-       
         ListNode* dummy = new ListNode(0);
         ListNode* current = dummy;
 
@@ -27,7 +26,7 @@ public:
         }
 
         ListNode* result = dummy->next;
-        delete dummy;  
+        delete dummy;
         return result;
     }
 };
