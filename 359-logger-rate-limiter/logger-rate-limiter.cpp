@@ -1,20 +1,16 @@
 class Logger {
 
 public:
-    unordered_map<string,int>mp;
+    unordered_map<string, int> mp;
     const int TIMEOUT = 10;
-    Logger() {
-        
-        
-    }
-    
+    Logger() {}
+
     bool shouldPrintMessage(int timestamp, string message) {
-        if(mp.find(message) != mp.end() && mp[message] > timestamp){
+        if (mp.find(message) != mp.end() && mp[message] > timestamp) {
             return false;
         }
-        mp[message] = timestamp +  TIMEOUT;
+        mp[message] = timestamp + TIMEOUT;
         return true;
-        
     }
 };
 
