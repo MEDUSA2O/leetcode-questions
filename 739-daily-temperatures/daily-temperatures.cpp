@@ -6,26 +6,24 @@ auto init = []() {
 }();
 class Solution {
 public:
-Solution() {
+    Solution() {
         ios_base::sync_with_stdio(false);
-        cin.tie(nullptr); cout.tie(nullptr);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
     }
     vector<int> dailyTemperatures(vector<int>& temperatures) {
-        vector<int>ans(temperatures.size() , 0);
-        stack<pair<int,int>>s;
+        vector<int> ans(temperatures.size(), 0);
+        stack<pair<int, int>> s;
         int n = temperatures.size();
-        for(int i = 0 ; i < n ; i++ ){
+        for (int i = 0; i < n; i++) {
             int t = temperatures[i];
-            while( !s.empty() && t > s.top().first){
-                auto [temp , index] = s.top();
+            while (!s.empty() && t > s.top().first) {
+                auto [temp, index] = s.top();
                 s.pop();
                 ans[index] = i - index;
-
             }
-            s.push({t,i});
-
+            s.push({t, i});
         }
         return ans;
-        
     }
 };
