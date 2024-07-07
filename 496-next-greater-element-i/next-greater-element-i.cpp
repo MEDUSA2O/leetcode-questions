@@ -1,31 +1,27 @@
-#include <vector>
-#include <stack>
-#include <unordered_map>
-
 class Solution {
 public:
-    std::vector<int> nextGreaterElement(std::vector<int>& nums1, std::vector<int>& nums2) {
-        std::stack<int> stack;
-        std::unordered_map<int, int> map;
-        
-        for (int num : nums2) {
-            while (!stack.empty() && num > stack.top()) {
-                map[stack.top()] = num;
-                stack.pop();
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        stack<int>s;
+        unordered_map<int,int>mp;
+        for( auto n : nums2){
+
+            while(!s.empty() && n > s.top()){
+                mp[s.top()] = n;
+                s.pop();  
             }
-            stack.push(num);
+            s.push(n);
         }
-        
-        while (!stack.empty()) {
-            map[stack.top()] = -1;
-            stack.pop();
+        while(!s.empty()){
+            mp[s.top()] = -1;
+            s.pop();
         }
-        
-        std::vector<int> res(nums1.size());
-        for (size_t i = 0; i < nums1.size(); ++i) {
-            res[i] = map[nums1[i]];
+        vector<int>res(nums1.size());
+        for( int i = 0 ; i < nums1.size() ; i++){
+            res[i] = mp[nums1[i]];
         }
-        
         return res;
+
+
+        
     }
 };
