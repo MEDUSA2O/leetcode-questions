@@ -1,26 +1,31 @@
-class Solution{
-  public:
-  vector<int> nextGreaterElement(vector<int>& nums1 , vector<int>& nums2){
-    vector<int> ans;
-    for(int i = 0 ; i < nums1.size() ; i++){
-      int max=-1;
-      for(int j = 0 ; j<nums2.size();j++){
-        int index = j;
-        if(nums1[i] == nums2[index]){
-          while(index!=nums2.size()){
-            if(nums2[index]>nums1[i]){
-              max=nums2[index];
-              break;
+#include <vector>
+#include <stack>
+#include <unordered_map>
+
+class Solution {
+public:
+    std::vector<int> nextGreaterElement(std::vector<int>& nums1, std::vector<int>& nums2) {
+        std::stack<int> stack;
+        std::unordered_map<int, int> map;
+        
+        for (int num : nums2) {
+            while (!stack.empty() && num > stack.top()) {
+                map[stack.top()] = num;
+                stack.pop();
             }
-            index++;
-          }
-
+            stack.push(num);
         }
-      }
-      ans.push_back(max);
-
-
+        
+        while (!stack.empty()) {
+            map[stack.top()] = -1;
+            stack.pop();
+        }
+        
+        std::vector<int> res(nums1.size());
+        for (size_t i = 0; i < nums1.size(); ++i) {
+            res[i] = map[nums1[i]];
+        }
+        
+        return res;
     }
-    return ans;
-  }
 };
