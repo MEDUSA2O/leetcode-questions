@@ -1,3 +1,9 @@
+auto init = []() {
+    std::ios::sync_with_stdio(0);
+    std::cin.tie(0);
+    std::cout.tie(0);
+    return 'c';
+}();
 class Solution {
 public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
