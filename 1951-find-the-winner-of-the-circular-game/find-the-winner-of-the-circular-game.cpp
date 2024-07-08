@@ -4,14 +4,15 @@
 class Solution {
 public:
     int findTheWinner(int n, int k) {
-                ios::sync_with_stdio(false); cin.tie(0);
+        ios::sync_with_stdio(false);
+        cin.tie(0);
 
-           queue<int> q;
+        queue<int> q;
         // Fill the queue with numbers from 1 to n
         for (int i = 1; i <= n; ++i) {
             q.push(i);
         }
-        
+
         // Simulate the process
         while (q.size() > 1) {
             // Move the first k-1 people to the end of the queue
@@ -22,9 +23,8 @@ public:
             // Remove the k-th person
             q.pop();
         }
-        
+
         // The last remaining person is the winner
         return q.front();
-        
     }
-}; 
+};
