@@ -1,6 +1,11 @@
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
 class Solution {
 public:
     int findTheWinner(int n, int k) {
+                ios::sync_with_stdio(false); cin.tie(0);
+
            queue<int> q;
         // Fill the queue with numbers from 1 to n
         for (int i = 1; i <= n; ++i) {
