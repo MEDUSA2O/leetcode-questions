@@ -1,23 +1,20 @@
 class Solution {
 public:
     string reverseParentheses(string s) {
-        stack<int> openParenthesesIndices;
-        string result;
-        for (char currentChar : s) {
-            if (currentChar == '(') {
-                // Store the current length as the start index for future
-                // reversal
-                openParenthesesIndices.push(result.length());
-            } else if (currentChar == ')') {
-                int start = openParenthesesIndices.top();
-                openParenthesesIndices.pop();
-                // Reverse the substring between the matching parentheses
-                reverse(result.begin() + start, result.end());
+        stack<int> st;
+        string res;
+        for(char i : s) {
+            if (i == '(') {
+                st.push(res.size());
+            } else if (i == ')') {
+                int ans = st.top();
+                st.pop();
+                reverse(res.begin() + ans, res.end());
+
             } else {
-                // Append non-parenthesis characters to the processed string
-                result += currentChar;
+                res += i;
             }
         }
-        return result;
+        return res;
     }
 };
