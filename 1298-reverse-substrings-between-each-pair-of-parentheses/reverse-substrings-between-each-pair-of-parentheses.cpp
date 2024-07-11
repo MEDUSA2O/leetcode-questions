@@ -1,32 +1,21 @@
 class Solution {
 public:
     string reverseParentheses(string s) {
-        int n = s.length();
         stack<int> openParenthesesIndices;
-        vector<int> pair(n);
-
-        // First pass: Pair up parentheses
-        for (int i = 0; i < n; ++i) {
-            if (s[i] == '(') {
-                openParenthesesIndices.push(i);
-            }
-            if (s[i] == ')') {
-                int j = openParenthesesIndices.top();
-                openParenthesesIndices.pop();
-                pair[i] = j;
-                pair[j] = i;
-            }
-        }
-
-        // Second pass: Build the result string
         string result;
-        for (int currIndex = 0, direction = 1; currIndex < n;
-             currIndex += direction) {
-            if (s[currIndex] == '(' || s[currIndex] == ')') {
-                currIndex = pair[currIndex];
-                direction = -direction;
+        for (char currentChar : s) {
+            if (currentChar == '(') {
+                // Store the current length as the start index for future
+                // reversal
+                openParenthesesIndices.push(result.length());
+            } else if (currentChar == ')') {
+                int start = openParenthesesIndices.top();
+                openParenthesesIndices.pop();
+                // Reverse the substring between the matching parentheses
+                reverse(result.begin() + start, result.end());
             } else {
-                result += s[currIndex];
+                // Append non-parenthesis characters to the processed string
+                result += currentChar;
             }
         }
         return result;
