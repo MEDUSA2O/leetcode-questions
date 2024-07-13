@@ -1,24 +1,22 @@
 class Solution {
 public:
-    vector<int> survivedRobotsHealths(vector<int>& positions,
-                                      vector<int>& healths, string directions) {
+    vector<int> survivedRobotsHealths(vector<int>& positions, vector<int>& healths, string directions) {
         unordered_map<int, int> index_map;
         for (int i = 0; i < positions.size(); ++i) {
             index_map[positions[i]] = i;
         }
-
+        
         vector<int> stack; // Stack to keep track of robot indices
-
+        
         sort(positions.begin(), positions.end()); // Sort positions
-
+        
         for (int p : positions) {
             int i = index_map[p];
             if (directions[i] == 'R') {
                 stack.push_back(i); // Push index of robot moving to the right
             } else {
                 // Handle collisions with robots moving to the right
-                while (!stack.empty() && directions[stack.back()] == 'R' &&
-                       healths[i] > 0) {
+                while (!stack.empty() && directions[stack.back()] == 'R' && healths[i] > 0) {
                     int i2 = stack.back();
                     stack.pop_back();
                     if (healths[i] > healths[i2]) {
@@ -37,7 +35,7 @@ public:
                 }
             }
         }
-
+        
         // Collect the healths of survived robots
         vector<int> result;
         for (int h : healths) {
