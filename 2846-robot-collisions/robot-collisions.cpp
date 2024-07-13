@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<int> survivedRobotsHealths(vector<int>& positions, vector<int>& healths, string directions) {
+         std::ios_base::sync_with_stdio(false), std::cin.tie(nullptr), std::cout.tie(nullptr);
         unordered_map<int, int> index_map;
         for (int i = 0; i < positions.size(); ++i) {
             index_map[positions[i]] = i;
