@@ -1,46 +1,30 @@
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include <algorithm>
-
-using namespace std;
-
 class Solution {
 public:
     int numMatchingSubseq(string s, vector<string>& words) {
+        ios_base::sync_with_stdio(false); cin.tie(NULL);
         int count = 0;
-        unordered_map<char, vector<int>> charIndices;
-        int sLen = s.size();
-
-        // Store the indices of each character in the string s
-        for (int i = 0; i < sLen; i++) {
-            charIndices[s[i]].push_back(i);
+        unordered_map<char, vector<int>> mp;
+        int n1 = s.size();
+        for (int i = 0; i < n1; i++) {
+            mp[s[i]].push_back(i);
         }
-
-        // Check each word in words
-        for (const string& word : words) {
-            int prevIndex = -1;
-            bool isSubsequence = true;
-
-            // Check if the word is a subsequence of s
-            for (char c : word) {
-                if (charIndices.find(c) == charIndices.end()) {
-                    isSubsequence = false;
+        for (string m : words) {
+            int prev = -1;
+            bool pre = true;
+            for (char c : m) {
+                if (mp.find(c) == mp.end()) {
+                    pre = false;
                     break;
                 }
-
-                // Find the first index in charIndices[c] that is greater than prevIndex
-                auto it = upper_bound(charIndices[c].begin(), charIndices[c].end(), prevIndex);
-                if (it == charIndices[c].end()) {
-                    isSubsequence = false;
+                
+                auto it = upper_bound(mp[c].begin(), mp[c].end(), prev);
+                if (it == mp[c].end()) {
+                    pre = false;
                     break;
                 }
-
-                prevIndex = *it;
+                prev = *it;
             }
-
-            // If the word is a subsequence, increment the count
-            if (isSubsequence) {
+            if (pre == true) {
                 count++;
             }
         }
