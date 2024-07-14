@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
+        ios_base::sync_with_stdio(false); cin.tie(NULL);
         unordered_map<char, vector<int>> mp;
         int s1 = s.size();
         int s2 = t.size();
