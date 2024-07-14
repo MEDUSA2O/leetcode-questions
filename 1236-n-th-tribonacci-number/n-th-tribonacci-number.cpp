@@ -1,23 +1,17 @@
 class Solution {
-private:
-    unordered_map<int, int> dp = {
-        {0, 0},
-        {1, 1},
-        {2, 1}
-    };
-    
-    int dfs(int i) {
-        if (dp.count(i)) {
-            return dp[i];
-        }
-        
-        int answer = dfs(i - 1) + dfs(i - 2) + dfs(i - 3);
-        dp[i] = answer;
-        return answer;
-    }
-    
 public:
     int tribonacci(int n) {
-        return dfs(n);
+        if(n < 3){
+            return n == 0 ? 0 : 1;
+        }
+        vector<int>dp(n+1,0);
+        dp[0] = 0 ;
+        dp[1] = 1;
+        dp[2] = 1;
+        for(int i = 3 ; i <= n ; i++){
+            dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
+        }
+        return dp[n];
+        
     }
 };
