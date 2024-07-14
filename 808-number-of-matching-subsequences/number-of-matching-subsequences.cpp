@@ -1,46 +1,49 @@
 #include <vector>
 #include <string>
 #include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
 class Solution {
 public:
-    int numMatchingSubseq(string S, vector<string>& words) {
-        unordered_map<string, bool> memo;
+    int numMatchingSubseq(string s, vector<string>& words) {
         int count = 0;
+        unordered_map<char, vector<int>> charIndices;
+        int sLen = s.size();
 
+        // Store the indices of each character in the string s
+        for (int i = 0; i < sLen; i++) {
+            charIndices[s[i]].push_back(i);
+        }
+
+        // Check each word in words
         for (const string& word : words) {
-            if (memo.find(word) != memo.end()) {
-                if (memo[word]) {
-                    count++;
+            int prevIndex = -1;
+            bool isSubsequence = true;
+
+            // Check if the word is a subsequence of s
+            for (char c : word) {
+                if (charIndices.find(c) == charIndices.end()) {
+                    isSubsequence = false;
+                    break;
                 }
-                continue;
+
+                // Find the first index in charIndices[c] that is greater than prevIndex
+                auto it = upper_bound(charIndices[c].begin(), charIndices[c].end(), prevIndex);
+                if (it == charIndices[c].end()) {
+                    isSubsequence = false;
+                    break;
+                }
+
+                prevIndex = *it;
             }
 
-            if (isSubsequence(S, word)) {
-                memo[word] = true;
+            // If the word is a subsequence, increment the count
+            if (isSubsequence) {
                 count++;
-            } else {
-                memo[word] = false;
             }
         }
-
         return count;
-    }
-
-private:
-    bool isSubsequence(const string& S, const string& word) {
-        int sLen = S.length(), wLen = word.length();
-        int sIndex = 0, wIndex = 0;
-
-        while (sIndex < sLen && wIndex < wLen) {
-            if (S[sIndex] == word[wIndex]) {
-                wIndex++;
-            }
-            sIndex++;
-        }
-
-        return wIndex == wLen;
     }
 };
