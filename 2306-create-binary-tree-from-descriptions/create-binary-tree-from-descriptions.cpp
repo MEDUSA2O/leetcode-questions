@@ -1,57 +1,44 @@
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-using namespace std;
-
-
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
+ * };
+ */
 class Solution {
 public:
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
-        // Maps value to TreeNode pointers
-        unordered_map<int, TreeNode*> valueToNodeMap;
-        // Stores values which are children in the descriptions
-        unordered_set<int> childrenValues;
-
-        // Iterate through descriptions to create nodes and set up tree structure
-        for (const auto& description : descriptions) {
-            // Extract parent value, child value, and whether it is a left child (1) or right child (0)
-            int parentValue = description[0];
-            int childValue = description[1];
-            bool isLeftChild = description[2];
-
-            // Create parent node if it doesn't already exist
-            if (valueToNodeMap.count(parentValue) == 0) {
-                valueToNodeMap[parentValue] = new TreeNode(parentValue);
+        unordered_map<int, TreeNode*> nodetovalue;
+        unordered_set<int> childnode;
+        for (auto i : descriptions) {
+            int parent = i[0];
+            int child = i[1];
+            bool leftornot = i[2];
+            if (nodetovalue.count(parent) == 0) {
+                nodetovalue[parent] = new TreeNode(parent);
             }
-
-            // Create child node if it doesn't already exist
-            if (valueToNodeMap.count(childValue) == 0) {
-                valueToNodeMap[childValue] = new TreeNode(childValue);
+            if (nodetovalue.count(child) == 0) {
+                nodetovalue[child] = new TreeNode(child);
             }
-
-            // Attach child node to parent's left or right branch
-            if (isLeftChild) {
-                valueToNodeMap[parentValue]->left = valueToNodeMap[childValue];
+            if (leftornot) {
+                nodetovalue[parent]->left = nodetovalue[child];
             } else {
-                valueToNodeMap[parentValue]->right = valueToNodeMap[childValue];
+                nodetovalue[parent]->right = nodetovalue[child];
             }
-
-            // Mark the child value as a child in the set
-            childrenValues.insert(childValue);
+            childnode.insert(child);
         }
-
-        // Find and return the root node (a node that is not a child)
-        for (const auto& entry : valueToNodeMap) {
-            int nodeValue = entry.first;
-            TreeNode* node = entry.second;
-
-            // If the value is not found in childrenValues set, it is the root
-            if (childrenValues.find(nodeValue) == childrenValues.end()) {
-                return node;
+        for (auto j : nodetovalue) {
+            int node_val = j.first;
+            TreeNode* node_child = j.second;
+            if (childnode.find(node_val) == childnode.end()) {
+                return node_child;
             }
         }
-
-        // This should not occur according to the problem statement
-        return nullptr;
+        return NULL;
     }
 };
