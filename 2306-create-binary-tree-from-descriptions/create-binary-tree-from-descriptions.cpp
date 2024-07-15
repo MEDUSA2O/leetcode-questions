@@ -10,6 +10,23 @@
  * right(right) {}
  * };
  */
+ #define MX 100001
+#pragma GCC optimize("03")
+#pragma GCC target ("avx")
+#pragma GCC target ("-fsplit-loops")
+TreeNode* Nodes[MX];
+TreeNode nodes[MX];
+int P[MX];
+int V[MX];
+int cnt = 0;
+int idx = 0;
+TreeNode* p;
+TreeNode* c;
+auto _ = [](){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL), cout.tie(NULL);
+    return 0;
+}();
 class Solution {
 public:
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
