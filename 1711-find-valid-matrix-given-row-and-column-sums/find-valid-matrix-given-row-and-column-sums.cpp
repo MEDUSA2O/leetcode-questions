@@ -1,20 +1,18 @@
 class Solution {
 public:
-    vector<vector<int>> restoreMatrix(vector<int>& rowSum, vector<int>& colSum) {
-        int n = rowSum.size();
-        int m = colSum.size();
-        vector<int>currrowsum(n,0);
-        vector<int>currcolsum(m,0);
-        vector<vector<int>>org(n,vector<int>(m,0));
-        for(int i = 0 ; i < n ; i++ ){
-            for(int j = 0 ;  j < m ; j++ ){
-                org[i][j] = min(rowSum[i] - currrowsum[i] , colSum[j] - currcolsum[j]);
-                currrowsum[i] += org[i][j];
-                currcolsum[j] += org[i][j];
-
-            }
+    vector<vector<int>> restoreMatrix(vector<int>& r, vector<int>& c) {
+        int m=r.size(),n=c.size();
+        vector<vector<int>> v(m,vector<int>(n,0));
+        for(int i=0;i<m;i++)
+        {
+          
+            for(int j=0;j<n;j++)
+            {
+                v[i][j]=min(r[i],c[j]);
+                r[i]-=v[i][j];
+                c[j]-=v[i][j];
+            }   
         }
-        return
-         org;
+        return v;
     }
 };
