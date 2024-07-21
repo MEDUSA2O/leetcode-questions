@@ -21,21 +21,18 @@ public:
             temp = temp->next;
         }
         ListNode* dummy = new ListNode(0);
-        ListNode* current = dummy;
-
-        // Iterate through the list again and add only unique elements to the
-        // new list
+        ListNode* curr = dummy;
         temp = head;
-        while (temp != nullptr) {
-            if (mp[temp->val] == 1) {
-                current->next = new ListNode(temp->val);
-                current = current->next;
+        while(temp != NULL){
+            if(mp[temp -> val] == 1){
+                curr -> next = new ListNode( temp -> val );
+                curr = curr -> next;
             }
-            temp = temp->next;
+            temp = temp -> next;
         }
-
-        ListNode* result = dummy->next;
-        delete dummy; // Clean up the dummy node
-        return result;
+        ListNode* result = dummy -> next ;
+        delete dummy;
+        return result; 
+       
     }
 };
