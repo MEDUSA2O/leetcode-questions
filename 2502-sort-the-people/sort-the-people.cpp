@@ -1,23 +1,17 @@
-static auto _ = [](){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return nullptr;
-}();
-
 
 class Solution {
 public:
     vector<string> sortPeople(vector<string>& names, vector<int>& heights) {
-        unordered_map<int,string>mp;
+       map<int,string>mp;
         for(int i = 0 ; i < heights.size() ; i++){
             mp[heights[i]] = names[i];
         }
-        sort(heights.begin() , heights.end(),greater<int>());
+        // sort(heights.begin() , heights.end());
         vector<string>ans;
-        for(auto i : heights){
-            ans.push_back(mp[i]);
+        for(auto i : mp){
+            ans.push_back(i.second);
         }
+        reverse(ans.begin(), ans.end());
         return ans;
     }
 };
