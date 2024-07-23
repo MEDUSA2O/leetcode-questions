@@ -1,33 +1,27 @@
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <algorithm>
 using namespace std;
 
 class Solution {
 public:
     vector<int> frequencySort(vector<int>& nums) {
-        
-        map<int, int> freqMap;
-        for (auto num : nums) {
+        // Step 1: Count the frequency of each element
+        unordered_map<int, int> freqMap;
+        for (int num : nums) {
             freqMap[num]++;
         }
-        vector<pair<int, int>> freqVec;
-        for (auto pair : freqMap) {
-            freqVec.push_back(pair);
-        }
 
-        sort(freqVec.begin(), freqVec.end(), [](pair<int, int>& a, pair<int, int>& b) {
-            if (a.second == b.second) {
-                return a.first > b.first;
+        // Step 2: Sort the nums vector with a custom comparator
+        sort(nums.begin(), nums.end(), [&](int a, int b) {
+            // If frequencies are different, sort by frequency
+            if (freqMap[a] != freqMap[b]) {
+                return freqMap[a] < freqMap[b];
             }
-            return a.second < b.second;
+            // If frequencies are the same, sort by value descending
+            return a > b;
         });
 
-        vector<int> result;
-        for (auto& pair : freqVec) {
-            result.insert(result.end(), pair.second, pair.first);
-        }
-
-        return result;
+        return nums;
     }
 };
