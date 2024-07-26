@@ -1,43 +1,54 @@
-class Solution {
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
 
-private:
-    Node* first = nullptr;
-    Node* last = nullptr;
+    Node() {}
 
-    void helper(Node* node) {
-        if (node) {
-            // Traverse the left subtree
-            helper(node->left);
-
-            // Link the previous node (last) with the current one (node)
-            if (last) {
-                last->right = node;
-                node->left = last;
-            } else {
-                // If this is the smallest node, initialize the first node
-                first = node;
-            }
-
-            // Mark the current node as the last one
-            last = node;
-
-            // Traverse the right subtree
-            helper(node->right);
-        }
+    Node(int _val) {
+        val = _val;
+        left = NULL;
+        right = NULL;
     }
 
-public:
-    Node* treeToDoublyList(Node* root) {
-        if (!root) return nullptr;
-
-        // Perform the inorder traversal to build the doubly linked list
-        helper(root);
-
-        // Close the circular doubly linked list
-        last->right = first;
-        first->left = last;
-
-        return first;
+    Node(int _val, Node* _left, Node* _right) {
+        val = _val;
+        left = _left;
+        right = _right;
     }
 };
-  
+*/
+
+class Solution {
+    Node* last = NULL;
+    Node* first = NULL;
+
+private:
+    void helper(Node* node){
+        if(node == NULL)return;
+        helper(node -> left);
+        if(last){
+            last -> right = node;
+            node -> left = last;
+
+
+        }
+        else{
+            first = node;
+        }
+        last = node;
+        helper( node -> right);
+    }
+public:
+    Node* treeToDoublyList(Node* root) {
+        if( root == NULL) return NULL;
+        helper(root);
+        last -> right = first;
+        first -> left = last;
+        return first;
+        
+    }
+};
