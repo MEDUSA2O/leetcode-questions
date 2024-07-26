@@ -27,28 +27,28 @@ class Solution {
     Node* first = NULL;
 
 private:
-    void helper(Node* node){
-        if(node == NULL)return;
-        helper(node -> left);
-        if(last){
-            last -> right = node;
-            node -> left = last;
+    void helper(Node* node) {
+        if (node == NULL)
+            return;
+        helper(node->left);
+        if (last) {
+            last->right = node;
+            node->left = last;
 
-
-        }
-        else{
+        } else {
             first = node;
         }
         last = node;
-        helper( node -> right);
+        helper(node->right);
     }
+
 public:
     Node* treeToDoublyList(Node* root) {
-        if( root == NULL) return NULL;
+        if (root == NULL)
+            return NULL;
         helper(root);
-        last -> right = first;
-        first -> left = last;
+        last->right = first;
+        first->left = last;
         return first;
-        
     }
 };
