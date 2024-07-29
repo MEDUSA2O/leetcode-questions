@@ -1,40 +1,40 @@
-#include <vector>
-#include <string>
-#include <sstream>
-#include <deque>
-#include <algorithm>
-
-using namespace std;
-
 class Solution {
 public:
     string simplifyPath(string path) {
-        deque<string> dirs;
-        stringstream ss(path);
-        string dir;
+        stack<string> s;
+        string ans;
         
-        while (getline(ss, dir, '/')) {
-            if (dir.empty() || dir == ".") {
+        for(int i = 0; i < path.size(); ++i) {
+            if(path[i] == '/') {
                 continue;
             }
-            if (dir == "..") {
-                if (!dirs.empty()) {
-                    dirs.pop_back();
+            string temp;
+            while(i < path.size() && path[i] != '/') {
+                temp += path[i];
+                ++i;
+            }
+            if(temp == ".") {
+                continue;
+            }
+            else if(temp == "..") {
+                if(!s.empty()) {
+                    s.pop();
                 }
-            } else {
-                dirs.push_back(dir);
+            }
+            else {
+                s.push(temp);
             }
         }
         
-        string result = "/";
-        while (!dirs.empty()) {
-            result += dirs.front();
-            dirs.pop_front();
-            if (!dirs.empty()) {
-                result += "/";
-            }
+        while(!s.empty()) {
+            ans = "/" + s.top() + ans;
+            s.pop();
         }
         
-        return result;
+        if(ans.size() == 0) {
+            return "/";
+        }
+        
+        return ans;
     }
 };
