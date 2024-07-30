@@ -11,10 +11,8 @@ public:
                     currnum += 1;
                     len += 1;
                 }
-                 ans = max(ans, len);
+                ans = max(ans, len);
             }
-
-           
         }
         return ans;
     }
