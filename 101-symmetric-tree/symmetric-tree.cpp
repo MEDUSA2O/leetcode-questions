@@ -13,14 +13,16 @@
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) { return dfs(root, root); }
-    private:
+
+private:
     bool dfs(TreeNode* left, TreeNode* right) {
-        if (right == NULL && left == NULL)
+        if (left == NULL && right == NULL) {
             return true;
-        if (right == NULL || left == NULL)
+        }
+        if (left == NULL || right == NULL) {
             return false;
-          return (left->val == right->val) &&
-               dfs(left->left, right->right) &&
-               dfs(left->right, right->left);
+        }
+        return (left->val == right->val) && dfs(left->right, right->left) &&
+               dfs(left->left, right->right);
     }
 };
