@@ -8,10 +8,13 @@ public:
 
         vector<vector<int>> ans(m, vector<int>(n));
 
-        for (int i = 0; i < original.size(); ++i) {
-            ans[i / n][i % n] = original[i];
+        int i = 0 ;
+        for(int r = 0 ; r < m ; r++){
+            for(int c = 0 ; c < n ;c++){
+                ans[r][c] = original[i];
+                i++;
+            }
         }
-
         return ans;
     }
 };
