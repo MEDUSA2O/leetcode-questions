@@ -9,8 +9,9 @@ public:
         for (int i = 0 ; i < chalk.size() ; i++) {
             if (m < chalk[i]) {
                 return i;
+                
             }
-            m -= chalk[i];
+            m = m - chalk[i];
         }
         return -1;
     }
