@@ -1,3 +1,14 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx2,tune=native")
+
+bool init() {
+    ios_base::sync_with_stdio(false);
+    cout.tie(nullptr);
+    return true;
+}
+
+bool _ = init();
+
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
