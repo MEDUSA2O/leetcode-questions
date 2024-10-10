@@ -10,7 +10,7 @@
 //             }
 //         }
 //         return w;
-        
+
 //     }
 // };
 class Solution {
@@ -28,8 +28,7 @@ public:
         int maxWidth = 0;
 
         for (int j = n - 1; j >= 0; j--) {
-            while (!s.empty() &&
-                   nums[s.top()] <= nums[j]) {
+            while (!s.empty() && nums[s.top()] <= nums[j]) {
                 maxWidth = max(maxWidth, j - s.top());
                 s.pop();
             }
