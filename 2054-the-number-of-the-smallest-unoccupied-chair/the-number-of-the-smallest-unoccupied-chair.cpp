@@ -1,17 +1,15 @@
 class Solution {
 public:
     int smallestChair(vector<vector<int>>& times, int targetFriend) {
-        vector<int> targetTime = times[targetFriend];
-        sort(times.begin(), times.end());
-
+        vector<int>targettime = times[targetFriend];
         int n = times.size();
-        vector<int> chairTime(n);
-
-        for (auto time : times) {
-            for (int i = 0; i < n; i++) {
-                if (chairTime[i] <= time[0]) {
-                    chairTime[i] = time[1];
-                    if (time == targetTime) return i;
+        vector<int>chair(n);
+        sort(times.begin(),times.end());
+        for(auto t : times){
+            for(int i = 0 ; i < n ; i ++){
+                if(chair[i] <= t[0]){
+                    chair[i] = t[1];
+                    if(t == targettime)return i;
                     break;
                 }
             }
